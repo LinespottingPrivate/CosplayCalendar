@@ -34,5 +34,6 @@
   {"id": "mumbai", "name": "Mumbai", "country": "India", "lat": 19.08, "lng": 72.88},
   {"id": "bangkok", "name": "Bangkok", "country": "Thailand", "lat": 13.76, "lng": 100.50},
   {"id": "cairo", "name": "Cairo", "country": "Egypt", "lat": 30.04, "lng": 31.24},
+  {"id": "tel-aviv", "name": "Tel Aviv", "country": "Israel", "lat": 32.01, "lng": 34.89},
   {"id": "cape-town", "name": "Cape Town", "country": "South Africa", "lat": -33.92, "lng": 18.42}
 ]
