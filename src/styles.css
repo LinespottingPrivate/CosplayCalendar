@@ -13,6 +13,41 @@
   --radius-lg: 1rem;
 }
 
+html {
+  color-scheme: dark;
+}
+
+html[data-theme="day"] {
+  color-scheme: light;
+  --color-bg: #cfe8f6;
+  --color-surface: #f5fbfe;
+  --color-raise: #b9dff0;
+  --color-fg: #0b2a40;
+  --color-muted: #3d6580;
+  --color-gold: #0868a3;
+  --color-line: #a9cfe3;
+}
+
+html[data-theme="day"] .stage {
+  --color-bg: #110e0c;
+  --color-fg: #f4efe6;
+  --color-gold: #e4b15a;
+  --color-line: #3a322a;
+  background: #110e0c;
+}
+
+.theme-swap {
+  background: #cfe8f6;
+  color: #0b2a40;
+  border: 1px solid #7eb8d6;
+}
+
+html[data-theme="day"] .theme-swap {
+  background: #110e0c;
+  color: #f4efe6;
+  border-color: #3a322a;
+}
+
 @layer base {
   button:not(:disabled),
   [role="button"]:not(:disabled) {

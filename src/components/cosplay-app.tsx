@@ -52,6 +52,7 @@ type Persisted = {
   sort: SortKey;
   query: string;
   overlays: Record<string, Dict>;
+  theme: "night" | "day";
 };
 
 const DEFAULTS: Persisted = {
@@ -77,6 +78,7 @@ const DEFAULTS: Persisted = {
   sort: "soonest",
   query: "",
   overlays: {},
+  theme: "night",
 };
 
 function todayISO() {
@@ -201,6 +203,10 @@ export function CosplayApp() {
     localStorage.setItem(STORE, JSON.stringify(p));
     document.documentElement.lang = p.locale;
     document.documentElement.dir = p.locale === "ar" ? "rtl" : "ltr";
+    document.documentElement.dataset.theme = p.theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", p.theme === "day" ? "#cfe8f6" : "#110e0c");
   }, [p, ready]);
 
   useEffect(() => {
@@ -439,6 +445,14 @@ export function CosplayApp() {
           <p className="mt-2 max-w-xl text-sm text-muted">{label("tagline")}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            className="theme-swap mt-5 min-h-11 rounded-lg px-3 text-sm transition-transform duration-150 active:scale-[0.96]"
+            aria-pressed={p.theme === "day"}
+            onClick={() => patch({ theme: p.theme === "day" ? "night" : "day" })}
+          >
+            {p.theme === "day" ? label("themeNight") : label("themeDay")}
+          </button>
           <label className="grid gap-1 text-xs text-muted">
             {label("language")}
             <select

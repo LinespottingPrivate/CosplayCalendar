@@ -58,6 +58,8 @@ const extra: Record<string, Dict> = {
     cloudflare: "Cloudflare",
     cloudflareBody:
       "The calendar runs here. A Worker in the repo answers /api/coach on Cloudflare: wrangler secret put XAI_API_KEY. Visitors can paste their own key. The $9 figure is the hosted-plan price — this app does not take a card.",
+    themeDay: "Light blue",
+    themeNight: "Dark",
   },
   sv: {
     hosted: "Värdcoach · 9 USD/mån",
