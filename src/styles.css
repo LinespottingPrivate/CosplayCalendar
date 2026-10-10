@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #110e0c;
+  --color-surface: #1c1814;
+  --color-raise: #2a241c;
+  --color-fg: #f4efe6;
+  --color-muted: #a398a6;
+  --color-gold: #e4b15a;
+  --color-line: #3a322a;
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-sans: "Outfit", "Avenir Next", system-ui, sans-serif;
+  --radius-lg: 1rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  html,
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    min-height: 100%;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-bg);
+  }
+}
+
+.cc-range {
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--color-line);
+  border-radius: 999px;
+}
+
+.cc-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 999px;
+  background: var(--color-gold);
+  border: 2px solid var(--color-bg);
+}
+
+.cc-range:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 6px;
+}
+
+.marquee {
+  background-image: radial-gradient(circle, var(--color-gold) 1.5px, transparent 1.7px);
+  background-size: 0.85rem 0.85rem;
+  background-repeat: repeat-x;
+  height: 0.7rem;
+  opacity: 0.85;
+}
+
+.stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateZ(0);
+  background: var(--color-bg);
+  height: 18rem;
+}
+
+.hero-video,
+.hero-still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+.stage-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--color-bg) 20%, transparent),
+    var(--color-bg) 92%
+  );
+}
+
+.flyer {
+  position: absolute;
+  width: 5.5rem;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  z-index: 2;
+}
+
+.flyer img {
+  width: 100%;
+  height: auto;
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 96%);
+}
+
+.flyer-a { animation: drift-a 18s linear infinite; left: 4%; bottom: 0; }
+.flyer-b { animation: drift-b 22s linear -6s infinite; left: 28%; bottom: -1rem; width: 6.25rem; }
+.flyer-c { animation: drift-c 25s linear -11s infinite; right: 22%; bottom: 0; }
+.flyer-d { animation: drift-d 28s linear -16s infinite; right: 4%; bottom: -0.5rem; }
+
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 8%, 0) rotate(-6deg); }
+  50% { transform: translate3d(12%, -18%, 0) rotate(7deg); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(4deg); }
+  50% { transform: translate3d(-8%, -22%, 0) rotate(-8deg); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate3d(0, 10%, 0) rotate(5deg); }
+  50% { transform: translate3d(10%, -14%, 0) rotate(-5deg); }
+}
+@keyframes drift-d {
+  0%, 100% { transform: translate3d(0, 4%, 0) rotate(-4deg); }
+  50% { transform: translate3d(-14%, -20%, 0) rotate(8deg); }
+}
+
+.spin-stage {
+  perspective: 800px;
+  height: 12rem;
+  width: 9rem;
+  overflow: hidden;
+}
+
+.spin-ring {
+  position: relative;
+  width: 5.5rem;
+  height: 8.5rem;
+  margin: 1.5rem auto 0;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--spin, 0deg));
+}
+
+.spin-card {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  transform: rotateY(calc(var(--i) * 90deg)) translateZ(3.4rem);
+  backface-visibility: hidden;
+}
+
+.spin-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.playbill {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+@media (max-width: 640px) {
+  .flyer-c, .flyer-d { display: none; }
+  .flyer { width: 4.75rem; }
+  .stage { height: 15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flyer, .hero-video { display: none; }
+  .hero-still { display: block; opacity: 0.7; }
+  .spin-ring { transform: none; }
+}

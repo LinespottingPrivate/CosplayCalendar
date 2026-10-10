@@ -1,0 +1,7 @@
+name = "cosplay-calendar-coach"
+main = "src/index.ts"
+compatibility_date = "2026-10-10"
+
+# npx wrangler secret put XAI_API_KEY
+# The worker does not charge the $9 hosted plan. It forwards one chat
+# completion using the visitor key, or this secret when the visitor sends none.
